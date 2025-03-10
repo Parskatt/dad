@@ -229,7 +229,7 @@ class ConvRefiner(nn.Module):
 
     def forward(self, feats):
         b, c, hs, ws = feats.shape
-        with torch.autocast("cuda", enabled=self.amp, dtype=self.amp_dtype):
+        with torch.autocast(device_type=next(self.parameters()).device.type, enabled=self.amp, dtype=self.amp_dtype):
             x0 = self.block1(feats)
             x = self.hidden_blocks(x0)
             if self.residual:
@@ -247,7 +247,7 @@ class VGG19(nn.Module):
         self.amp_dtype = amp_dtype
 
     def forward(self, x, **kwargs):
-        with torch.autocast("cuda", enabled=self.amp, dtype=self.amp_dtype):
+        with torch.autocast(device_type=next(self.parameters()).device.type, enabled=self.amp, dtype=self.amp_dtype):
             feats = []
             sizes = []
             for layer in self.layers:
@@ -272,7 +272,7 @@ class VGG(nn.Module):
         self.amp_dtype = amp_dtype
 
     def forward(self, x, **kwargs):
-        with torch.autocast("cuda", enabled=self.amp, dtype=self.amp_dtype):
+        with torch.autocast(device_type=next(self.parameters()).device.type, enabled=self.amp, dtype=self.amp_dtype):
             feats = []
             sizes = []
             for layer in self.layers:
