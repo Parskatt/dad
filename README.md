@@ -12,7 +12,11 @@
   <h2 align="center"><p>
     <a href="README.md" align="center">Paper (Coming Soon...)</a>
   </p></h2>
-  <div align="center">DaD's a pretty good keypoint detector, probably the best.</div>
+  <p align="center">
+      <img src="assets/qualitative.jpg" alt="example" width=80%>
+      <br>
+      <em>DaD's a pretty good keypoint detector, probably the best.</em>
+  </p>
 </p>
 <p align="center">
 </p>
