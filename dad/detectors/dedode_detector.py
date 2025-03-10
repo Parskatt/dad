@@ -508,19 +508,25 @@ class DeDoDev2(DeDoDeDetector):
 
 def load_DaD(resize=1024, pretrained=True, weights_path=None) -> DaD:
     if weights_path is None:
-        weights_path = "dad.pth"
+        weights_path = (
+            "https://github.com/Parskatt/dad/releases/download/v0.1.0/dad.pth"
+        )
     device = get_best_device()
     encoder, decoder = dedode_detector_S()
     model = DaD(encoder, decoder, resize=resize).to(device)
     if pretrained:
-        weights = torch.load(weights_path, weights_only=False, map_location=device)
+        weights = torch.hub.load_state_dict_from_url(
+            weights_path, weights_only=False, map_location=device
+        )
         model.load_state_dict(weights)
     return model
 
 
 def load_DaDLight(resize=1024, weights_path=None) -> DaD:
     if weights_path is None:
-        weights_path = "dad_light.pth"
+        weights_path = (
+            "https://github.com/Parskatt/dad/releases/download/v0.1.0/dad_light.pth"
+        )
     return load_DaD(
         resize=resize,
         pretrained=True,
@@ -530,7 +536,9 @@ def load_DaDLight(resize=1024, weights_path=None) -> DaD:
 
 def load_DaDDark(resize=1024, weights_path=None) -> DaD:
     if weights_path is None:
-        weights_path = "dad_dark.pth"
+        weights_path = (
+            "https://github.com/Parskatt/dad/releases/download/v0.1.0/dad_dark.pth"
+        )
     return load_DaD(
         resize=resize,
         pretrained=True,
