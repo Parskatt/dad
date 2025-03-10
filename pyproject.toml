@@ -1,0 +1,35 @@
+[project]
+name = "dad"
+version = "0.1.0"
+description = "Definitely a Detector, DeDoDe and DISK, DaD and DaD."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "einops>=0.8.1",
+    "numpy>=1.24",
+    "opencv-python>=4.11.0.86",
+    "pillow>=11.1.0",
+    "torch>=2.4",
+    "torchvision>=0.21.0",
+]
+[dependency-groups]
+dev = [
+    "opencv-contrib-python>=4.11.0.86",
+    "matplotlib>=3.10.1",
+    "poselib==2.0.4",
+    "h5py>=3.13.0",
+    "pyhesaff>=2.1.1",
+    "romatch>=0.0.2",
+    "ruff>=0.9.10",
+    "tqdm>=4.67.1",
+    "wandb>=0.19.8",
+]
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[tool.uv.sources]
+romatch = { git = "https://github.com/Parskatt/RoMa.git" }
