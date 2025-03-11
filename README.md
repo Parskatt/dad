@@ -10,7 +10,7 @@
     <a href="https://scholar.google.com/citations?user=lkWfR08AAAAJ">Michael Felsberg</a>
   </p>
   <h2 align="center"><p>
-    <a href="README.md" align="center">Paper (Coming Soon...)</a>
+    <a href="https://arxiv.org/abs/2503.07347" align="center">Paper</a>
   </p></h2>
   <p align="center">
       <img src="assets/qualitative.jpg" alt="example" width=80%>
