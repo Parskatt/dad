@@ -96,7 +96,7 @@ Note however that the types of detectors that come from this type of training is
 (Note: You don't have to do this, it's just how I do it.)
 At the start of a new day I typically run 
 ```bash
-python new_day.py
+python experiments/new_day.py
 ```
 This creates a new folder in experiments, e.g., `experiments/w11/monday`.
 I then typically just copy the contents of a previous experiment, e.g.,
