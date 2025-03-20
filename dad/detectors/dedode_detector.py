@@ -229,7 +229,9 @@ class ConvRefiner(nn.Module):
 
     def forward(self, feats):
         b, c, hs, ws = feats.shape
-        with torch.autocast(device_type=feats.device.type, enabled=self.amp, dtype=self.amp_dtype):
+        with torch.autocast(
+            device_type=feats.device.type, enabled=self.amp, dtype=self.amp_dtype
+        ):
             x0 = self.block1(feats)
             x = self.hidden_blocks(x0)
             if self.residual:
@@ -247,7 +249,9 @@ class VGG19(nn.Module):
         self.amp_dtype = amp_dtype
 
     def forward(self, x, **kwargs):
-        with torch.autocast(device_type=x.device.type, enabled=self.amp, dtype=self.amp_dtype):
+        with torch.autocast(
+            device_type=x.device.type, enabled=self.amp, dtype=self.amp_dtype
+        ):
             feats = []
             sizes = []
             for layer in self.layers:
@@ -272,7 +276,9 @@ class VGG(nn.Module):
         self.amp_dtype = amp_dtype
 
     def forward(self, x, **kwargs):
-        with torch.autocast(device_type=x.device.type, enabled=self.amp, dtype=self.amp_dtype):
+        with torch.autocast(
+            device_type=x.device.type, enabled=self.amp, dtype=self.amp_dtype
+        ):
             feats = []
             sizes = []
             for layer in self.layers:
@@ -506,14 +512,38 @@ class DeDoDev2(DeDoDeDetector):
         )
 
 
-def load_DaD(resize=1024, pretrained=True, weights_path=None) -> DaD:
+def load_DaD(
+    resize=1024,
+    nms_size=3,
+    remove_borders=True,
+    increase_coverage=False,
+    coverage_pow=None,
+    coverage_size=None,
+    subpixel=True,
+    subpixel_temp=0.5,
+    keep_aspect_ratio=True,
+    pretrained=True,
+    weights_path=None,
+) -> DaD:
     if weights_path is None:
         weights_path = (
             "https://github.com/Parskatt/dad/releases/download/v0.1.0/dad.pth"
         )
     device = get_best_device()
     encoder, decoder = dedode_detector_S()
-    model = DaD(encoder, decoder, resize=resize).to(device)
+    model = DaD(
+        encoder,
+        decoder,
+        resize=resize,
+        nms_size=nms_size,
+        remove_borders=remove_borders,
+        increase_coverage=increase_coverage,
+        coverage_pow=coverage_pow,
+        coverage_size=coverage_size,
+        subpixel=subpixel,
+        subpixel_temp=subpixel_temp,
+        keep_aspect_ratio=keep_aspect_ratio,
+    ).to(device)
     if pretrained:
         weights = torch.hub.load_state_dict_from_url(
             weights_path, weights_only=False, map_location=device
@@ -522,26 +552,66 @@ def load_DaD(resize=1024, pretrained=True, weights_path=None) -> DaD:
     return model
 
 
-def load_DaDLight(resize=1024, weights_path=None) -> DaD:
+def load_DaDLight(
+    resize=1024,
+    nms_size=3,
+    remove_borders=True,
+    increase_coverage=False,
+    coverage_pow=None,
+    coverage_size=None,
+    subpixel=True,
+    subpixel_temp=0.5,
+    keep_aspect_ratio=True,
+    pretrained=True,
+    weights_path=None,
+) -> DaD:
     if weights_path is None:
         weights_path = (
             "https://github.com/Parskatt/dad/releases/download/v0.1.0/dad_light.pth"
         )
     return load_DaD(
         resize=resize,
-        pretrained=True,
+        nms_size=nms_size,
+        remove_borders=remove_borders,
+        increase_coverage=increase_coverage,
+        coverage_pow=coverage_pow,
+        coverage_size=coverage_size,
+        subpixel=subpixel,
+        subpixel_temp=subpixel_temp,
+        keep_aspect_ratio=keep_aspect_ratio,
+        pretrained=pretrained,
         weights_path=weights_path,
     )
 
 
-def load_DaDDark(resize=1024, weights_path=None) -> DaD:
+def load_DaDDark(
+    resize=1024,
+    nms_size=3,
+    remove_borders=True,
+    increase_coverage=False,
+    coverage_pow=None,
+    coverage_size=None,
+    subpixel=True,
+    subpixel_temp=0.5,
+    keep_aspect_ratio=True,
+    pretrained=True,
+    weights_path=None,
+) -> DaD:
     if weights_path is None:
         weights_path = (
             "https://github.com/Parskatt/dad/releases/download/v0.1.0/dad_dark.pth"
         )
     return load_DaD(
         resize=resize,
-        pretrained=True,
+        nms_size=nms_size,
+        remove_borders=remove_borders,
+        increase_coverage=increase_coverage,
+        coverage_pow=coverage_pow,
+        coverage_size=coverage_size,
+        subpixel=subpixel,
+        subpixel_temp=subpixel_temp,
+        keep_aspect_ratio=keep_aspect_ratio,
+        pretrained=pretrained,
         weights_path=weights_path,
     )
 

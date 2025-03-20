@@ -89,6 +89,9 @@ python experiments/repro_paper_results/rl.py
 ```
 Note however that the types of detectors that come from this type of training is stochastic, and you may need to do several runs to get a detector that matches our results.
 
+## Changes versus paper version
+1. I've updated inference to not include border pixels, see https://github.com/Parskatt/dad/issues/3 for details. However, training is still including borders. Results on most benchmarks is similar.
+
 ## How I run experiments
 (Note: You don't have to do this, it's just how I do it.)
 At the start of a new day I typically run 
@@ -113,18 +116,69 @@ You might not want to track stuff, and perhaps display some debugstuff, then you
 DEBUG=1 python experiments/w11/monday/new-cool-hparams.py
 ```
 ## Evaluation Results
-TODO
+<details>
+<summary>MegaDepth1500 Essential</summary>
+
+| Method ↓ | Max № Keypoints |||||
+|----------|------|------|------|------|------|
+|          | 512  | 1024 | 2048 | 4096 | 8192 |
+| DaD (Paper) | 64.9 | 67.9 | 69.4 | 69.3 | 68.8 |
+| DaD (This Repo) | 64.8 | 68.0 | 69.4 | 69.6 | 68.8 |
+</details>
+
+<details>
+<summary>MegaDepth1500 Fundamental</summary>
+
+| Method ↓ | Max № Keypoints |||||
+|----------|------|------|------|------|------|
+|          | 512  | 1024 | 2048 | 4096 | 8192 |
+| DaD (Paper) | 50.6 | 55.5 | 57.4 | 57.8 | 56.4 |
+| DaD (This Repo) | 50.6 | 55.5 | 57.7 | 58.2 | 56.4 |
+</details>
+
+<details>
+<summary>ScanNet1500 Essential</summary>
+
+| Method ↓ | Max № Keypoints |||||
+|----------|------|------|------|------|------|
+|          | 512  | 1024 | 2048 | 4096 | 8192 |
+| DaD (Paper) | 25.7 | 27.9 | 28.3 | 28.9 | 29.3 |
+| DaD (This Repo) | 26.3 | 28.0 | 28.6 | 29.0 | 29.2 |
+</details>
+
+<details>
+<summary>ScanNet1500 Fundamental</summary>
+
+| Method ↓ | Max № Keypoints |||||
+|----------|------|------|------|------|------|
+|          | 512  | 1024 | 2048 | 4096 | 8192 |
+| DaD (Paper) | 18.3 | 20.6 | 21.7 | 22.2 | 23.0 |
+| DaD (This Repo) | 18.6 | 21.4 | 21.9 | 22.5 | 23.3 |
+</details>
+
+<details>
+<summary>HPatches Viewpoint</summary>
+
+| Method ↓ | Max № Keypoints |||||
+|----------|------|------|------|------|------|
+|          | 512  | 1024 | 2048 | 4096 | 8192 |
+| DaD (Paper) | 58.2 | 60.5 | 61.0 | 61.5 | 61.4 |
+| DaD (This Repo) | 58.3 | 60.4 | 61.0 | 61.2 | 61.5 |
+</details>
+
 
 ## Licenses
 DaD is MIT licensed.
 
-Third party detectors in [dad/detectors/third_party](dad/detectors/third_party) have their own licenses. If you use them, please refer to their respective licenses in [here](licenses) (NOTE: There may be more licenses you need to care about than the ones listed. Before using any third pary code, make sure you're following their respective license).
-
-
-
+Third party detectors in [dad/detectors/third_party](dad/detectors/third_party) have their own licenses. If you use them, please refer to their respective licenses in [here](licenses) (NOTE: There may be more licenses you need to care about than the ones listed. Before using any third party code, make sure you're following their respective license).
 
 ## BibTeX
 
 ```txt
-TODO
+@article{edstedt2025dad,
+  title={{DaD: Distilled Reinforcement Learning for Diverse Keypoint Detection}},
+  author={Edstedt, Johan and B{\"o}kman, Georg and Wadenb{\"a}ck, M{\aa}rten and Felsberg, Michael},
+  journal={arXiv preprint arXiv:2503.07347},
+  year={2025}
+}
 ```
