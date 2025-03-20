@@ -53,7 +53,9 @@ def main():
 
     reward_func = ConstantReward(th=reward_th, eps=reward_eps)
 
-    model = dad.load_DaD(pretrained=False)
+    model = dad.load_DaD(
+        remove_borders=False, 
+        pretrained=False)
     optim = AdamW(model.parameters(), weight_decay=weight_decay, lr=lr)
     lr_scheduler = CosineAnnealingLR(optim, T_max=N)
     checkpointer = CheckPoint(workspace_path)
