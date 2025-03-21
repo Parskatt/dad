@@ -11,7 +11,7 @@ import torch.nn.functional as F
 from PIL import Image
 
 
-def get_best_device(verbose=False):
+def get_best_device(verbose=False) -> torch.device:
     device = torch.device("cpu")
     if torch.cuda.is_available():
         device = torch.device("cuda")
@@ -1057,3 +1057,15 @@ source .venv/bin/activate
 {command}
 """
     return sbatch_command
+
+
+def load_weights(weights_path: str, map_location: torch.device):
+    if weights_path.startswith(('http://', 'https://')):
+        # It's a URL, use torch.hub.load_state_dict_from_url
+        weights = torch.hub.load_state_dict_from_url(
+            weights_path, weights_only=False, map_location=map_location
+        )
+    else:
+        # It's a local path, use torch.load
+        weights = torch.load(weights_path, map_location=map_location)    
+    return weights

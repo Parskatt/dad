@@ -6,7 +6,7 @@ import torch.nn.functional as F
 import torchvision.models as tvm
 import torchvision.transforms as transforms
 from PIL import Image
-from dad.utils import get_best_device, sample_keypoints, check_not_i16
+from dad.utils import get_best_device, sample_keypoints, check_not_i16, load_weights
 
 from dad.types import Detector
 
@@ -545,9 +545,7 @@ def load_DaD(
         keep_aspect_ratio=keep_aspect_ratio,
     ).to(device)
     if pretrained:
-        weights = torch.hub.load_state_dict_from_url(
-            weights_path, weights_only=False, map_location=device
-        )
+        weights = load_weights(weights_path, device)
         model.load_state_dict(weights)
     return model
 
