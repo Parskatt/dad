@@ -230,6 +230,7 @@ class RLLoss(nn.Module):
 
 class MaxDistillLoss(nn.Module):
     def __init__(self, *teachers: list[dad.Detector]):
+        super().__init__()
         self.teachers = teachers
 
     def forward(self, batch, student):
