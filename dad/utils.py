@@ -1,7 +1,7 @@
 import math
 import warnings
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 from dad.types import Benchmark, Detector, Matcher
 import torch.nn as nn
 import cv2
@@ -832,7 +832,7 @@ def visualize_keypoints(img_path, vis_path, detector: Detector, num_keypoints: i
 
 
 def run_qualitative_examples(
-    *, model: Detector, workspace_path: str | Path, test_num_keypoints
+    *, model: Detector, workspace_path: Union[str, Path], test_num_keypoints
 ):
     import dad
 
