@@ -71,7 +71,7 @@ class Detector(ABC, nn.Module):
 class Matcher(ABC, nn.Module):
     @abstractmethod
     def match(
-        self, im_A_path: Union[str | Path], im_B_path: Union[str | Path]
+        self, im_A_path: Union[str, Path], im_B_path: Union[str, Path]
     ) -> tuple[torch.Tensor, torch.Tensor]:
         pass
 
@@ -101,7 +101,7 @@ class Benchmark(ABC):
         thresholds: list[int],
         sample_every: int = 1,
         num_ransac_runs: int = 5,
-        num_keypoints: Optional[list[int] | int] = None,
+        num_keypoints: Optional[Union[list[int], int]] = None,
     ) -> None:
         self.num_keypoints = (
             [512, 1024, 2048, 4096, 8192] if num_keypoints is None else num_keypoints

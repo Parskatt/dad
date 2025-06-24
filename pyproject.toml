@@ -3,19 +3,19 @@ name = "dad"
 version = "0.2.0"
 description = "Definitely a Detector, DeDoDe and DISK, DaD and DaD."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 dependencies = [
     "einops>=0.8.1",
     "numpy>=1.24",
     "opencv-python>=4.11.0.86",
-    "pillow>=11.1.0",
+    "pillow>=11.0.0",
     "torch>=2.4",
     "torchvision>=0.21.0",
 ]
 [dependency-groups]
 dev = [
     "opencv-contrib-python>=4.11.0.86",
-    "matplotlib>=3.10.1",
+    "matplotlib>=3.9",
     "poselib==2.0.4",
     "h5py>=3.13.0",
     "pyhesaff>=2.1.1",
