@@ -475,7 +475,7 @@ class DaD(DeDoDeDetector):
         coverage_pow=None,
         coverage_size=None,
         subpixel=True,
-        subpixel_temp=0.5,
+        subpixel_temp=0.15,
         keep_aspect_ratio=True,
         **kwargs,
     ) -> None:
@@ -538,7 +538,7 @@ def load_DaD(
     coverage_pow=None,
     coverage_size=None,
     subpixel=True,
-    subpixel_temp=0.5,
+    subpixel_temp=0.15,
     keep_aspect_ratio=True,
     pretrained=True,
     weights_path=None,
